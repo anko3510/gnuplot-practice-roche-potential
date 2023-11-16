@@ -1,0 +1,41 @@
+reset
+
+# 文字コードと出力形式の設定
+set encoding utf8
+set terminal pdfcairo font "IPAGothic" size 16cm, 10cm
+
+# 出力ファイルの設定
+set output "roche-potential.pdf"
+
+# 描画領域の設定
+set size ratio -1
+r = 2
+set xrange [-r : r]
+set yrange [0 : r]
+samples = 10000
+set isosamples samples, samples
+set grid
+
+# タイトル、ラベル、凡例
+set title "Pluto-Charon系のロッシュ・ポテンシャル（GM_♇/aで規格化）"
+set xlabel "距離 [/a]"
+set ylabel "距離 [/a]"
+
+# ロッシュ・ポテンシャルの定義
+mr = 0.122                                            # 伴星質量/主星質量
+pote1(x, y) = -1 / sqrt(x**2 + y**2)                  # 主星が作るポテンシャル
+pote2(x, y) = -mr / sqrt((x - 1)**2 + y**2)           # 伴星が作るポテンシャル
+pote3(x, y) = -(x**2 + y**2) / 2                      # 遠心力が作るポテンシャル
+roche(x, y) = pote1(x, y) + pote2(x, y) + pote3(x, y) # ロッシュ・ポテンシャル
+
+# 描画
+set pm3d
+set contour
+set cntrparam levels incremental -4.5, 0.09 , 0
+set for [i = 1:100] linetype i linecolor "gray30" linewidth 0.001
+set nosurface
+set view map
+splot [] [] [-4.5:0] roche(x, y) notitle
+set terminal pop
+exit
+
