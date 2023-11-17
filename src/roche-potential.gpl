@@ -2,7 +2,7 @@ reset
 
 # 文字コードと出力形式の設定
 set encoding utf8
-set terminal pdfcairo font "IPAGothic" size 16cm, 10cm
+set terminal pdfcairo font "IPAGothic" size 12cm, 7.5cm
 
 # 出力ファイルの設定
 set output "roche-potential.pdf"
@@ -12,8 +12,8 @@ set size ratio -1
 r = 2
 set xrange [-r : r]
 set yrange [0 : r]
-samples = 10000
-set isosamples samples, samples
+samples = 20000
+set isosamples samples, 0.5 * samples
 set grid
 
 # タイトル、ラベル、凡例
