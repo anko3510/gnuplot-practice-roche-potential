@@ -34,7 +34,9 @@ roche(x, y) = pote1(x, y) + pote2(x, y) + pote3(x, y)       # ロッシュ・ポ
 set pm3d
 set palette rgbformulae -7, -5, -15
 set contour
-set cntrparam levels incremental -0.7, 0.028, 0.0
+mincb = -0.7
+maxcb = 0.0
+set cntrparam levels incremental mincb, (maxcb - mincb) / 50, maxcb
 set for [i = 1:100] linetype i linecolor "gray30" linewidth 0.001
 set nosurface
 set view map
