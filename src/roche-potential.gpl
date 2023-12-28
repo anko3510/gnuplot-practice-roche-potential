@@ -12,7 +12,7 @@ set size ratio -1
 r = 2
 set xrange [-r : r]
 set yrange [0 : r]
-samples = 2000
+samples = 20000
 set isosamples samples, 0.5 * samples
 set grid
 
