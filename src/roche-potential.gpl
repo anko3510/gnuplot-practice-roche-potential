@@ -9,7 +9,7 @@ set output "roche-potential.pdf"
 
 # 描画領域の設定
 set size ratio -1
-r = 2
+r = 2.0
 set xrange [-r : r]
 set yrange [-0.25 * r : r]
 samples = 20000
@@ -23,22 +23,22 @@ set ylabel "y/a"
 set cblabel "\\{{/Symbol F}_{Roche}/(GM_♇/a)\\}^{-1}"
 
 # ロッシュ・ポテンシャルの定義
-mr = 0.122                                            # 伴星質量/主星質量
-gx = mr / (1 + mr)                                    # 重心のx座標
-pote1(x, y) = -1 / sqrt(x**2 + y**2)                  # 主星が作るポテンシャル
-pote2(x, y) = -mr / sqrt((x - 1)**2 + y**2)           # 伴星が作るポテンシャル
-pote3(x, y) = -((x - gx)**2 + y**2) / 2               # 遠心力が作るポテンシャル
-roche(x, y) = pote1(x, y) + pote2(x, y) + pote3(x, y) # ロッシュ・ポテンシャル
+mr = 0.122                                                  # 伴星質量/主星質量
+gx = mr / (1.0 + mr)                                        # 重心のx座標
+pote1(x, y) = -1 / sqrt(x**2.0 + y**2.0)                    # 主星が作るポテンシャル
+pote2(x, y) = -mr / sqrt((x - 1.0)**2.0 + y**2.0)           # 伴星が作るポテンシャル
+pote3(x, y) = -((x - gx)**2.0 + y**2.0) / 2.0               # 遠心力が作るポテンシャル
+roche(x, y) = pote1(x, y) + pote2(x, y) + pote3(x, y)       # ロッシュ・ポテンシャル
 
 # 描画
 set pm3d
 set palette rgbformulae -7, -5, -15
 set contour
-set cntrparam levels incremental -0.7, 0.028, 0
+set cntrparam levels incremental -0.7, 0.028, 0.0
 set for [i = 1:100] linetype i linecolor "gray30" linewidth 0.001
 set nosurface
 set view map
-splot [] [] [] 1/roche(x, y) notitle
+splot [] [] [] 1.0 / roche(x, y) notitle
 set terminal pop
 exit
 
