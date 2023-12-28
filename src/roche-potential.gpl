@@ -11,7 +11,7 @@ set output "roche-potential.pdf"
 set size ratio -1
 r = 2
 set xrange [-r : r]
-set yrange [0 : r]
+set yrange [-0.25 * r : r]
 samples = 20000
 set isosamples samples, 0.5 * samples
 set grid
