@@ -12,12 +12,12 @@ set size ratio -1
 r = 2
 set xrange [-r : r]
 set yrange [0 : r]
-samples = 20000
+samples = 2000
 set isosamples samples, 0.5 * samples
 set grid
 
 # タイトル、ラベル、凡例
-set title "Pluto-Charon系のロッシュ・ポテンシャル（GM_♇/aで規格化）"
+set title "Pluto-Charon系のロッシュ・ポテンシャル（GM_♇/aで規格化, -1乗）"
 set xlabel "x/a"
 set ylabel "y/a"
 
@@ -31,12 +31,13 @@ roche(x, y) = pote1(x, y) + pote2(x, y) + pote3(x, y) # ロッシュ・ポテン
 
 # 描画
 set pm3d
+set palette rgbformulae -7, -5, -15
 set contour
-set cntrparam levels incremental -5.0, 0.1, 0
+set cntrparam levels incremental -0.7, 0.028, 0
 set for [i = 1:100] linetype i linecolor "gray30" linewidth 0.001
 set nosurface
 set view map
-splot [] [] [-5.0 : 0] roche(x, y) notitle
+splot [] [] [] 1/roche(x, y) notitle
 set terminal pop
 exit
 
